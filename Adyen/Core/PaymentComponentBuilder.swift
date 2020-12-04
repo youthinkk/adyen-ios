@@ -16,9 +16,6 @@ public protocol PaymentComponentBuilder {
     /// Builds a certain `PaymentComponent` based on a `StoredPaymentMethod`.
     func build(paymentMethod: StoredPaymentMethod) -> PaymentComponent?
     
-    /// Builds a certain `PaymentComponent` based on a `StoredBCMCPaymentMethod`.
-    func build(paymentMethod: StoredBCMCPaymentMethod) -> PaymentComponent?
-    
     /// Builds a certain `PaymentComponent` based on a `CardPaymentMethod`.
     func build(paymentMethod: CardPaymentMethod) -> PaymentComponent?
     
