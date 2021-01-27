@@ -14,7 +14,7 @@ import XCTest
 class DropInActionComponentTests: XCTestCase {
 
     func testRedirectToHttpWebLink() {
-        let sut = DropInActionComponent()
+        let sut = AdyenActionHandler()
         let delegate = ActionComponentDelegateMock()
         sut.delegate = delegate
 
