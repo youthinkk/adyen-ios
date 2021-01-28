@@ -58,6 +58,16 @@
                ReferencedContainer = "container:Adyen.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E745258825C1CB10006A941F"
+               BuildableName = "AdyenWeChatTests.xctest"
+               BlueprintName = "AdyenWeChatTests"
+               ReferencedContainer = "container:Adyen.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
