@@ -5,9 +5,6 @@
 //
 
 import Adyen
-#if canImport(AdyenCard)
-    import AdyenCard
-#endif
 import Foundation
 import UIKit
 
@@ -54,7 +51,7 @@ public final class AdyenActionHandler: ActionComponent, Localizable {
         }
     }
     
-    /// Dismiss any `DismissableComponent` managed by the `DropInActionComponent`, for example when payment has concluded.
+    /// Dismiss any `DismissableComponent` managed by the `AdyenActionHandler`, for example when payment has concluded.
     ///
     /// - Parameter animated: A boolean indicating whether to dismiss with animation or not.
     /// - Parameter completion: A closure to execute when dismissal animation has completed.
@@ -66,7 +63,7 @@ public final class AdyenActionHandler: ActionComponent, Localizable {
     
     private var redirectComponent: RedirectComponent?
     private var threeDS2Component: ThreeDS2Component?
-    private var weChatPaySDKActionComponent: AnyWeChatPaySDKActionComponent?
+    internal var weChatPaySDKActionComponent: AnyWeChatPaySDKActionComponent?
     private var awaitComponent: AwaitComponent?
     
     private func perform(_ action: RedirectAction) {
@@ -132,7 +129,7 @@ public final class AdyenActionHandler: ActionComponent, Localizable {
     private func perform(_ action: AwaitAction) {
         guard environment.clientKey != nil else {
             // swiftlint:disable:next line_length
-            assertionFailure("Failed to instantiate AwaitComponent because client key is not configured. Please supply the client key in the PaymentMethodsConfiguration if using DropInComponent, or DropInActionComponent.clientKey if using DropInActionComponent separately.")
+            assertionFailure("Failed to instantiate AwaitComponent because client key is not configured. Please supply the client key in the PaymentMethodsConfiguration if using DropInComponent, or AdyenActionHandler.clientKey if using AdyenActionHandler separately.")
             return
         }
         let component = AwaitComponent(style: awaitComponentStyle)

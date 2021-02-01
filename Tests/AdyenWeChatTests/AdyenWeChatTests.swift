@@ -7,20 +7,39 @@
 //
 
 import XCTest
+import Adyen
+@testable import AdyenActions
 
 class AdyenWeChatTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    let weChatActionResponse = """
+    {
+      "timestamp" : "x",
+      "partnerid" : "x",
+      "noncestr" : "x",
+      "packageValue" : "Sign=WXPay",
+      "sign" : "x",
+      "appid" : "x",
+      "prepayid" : "x"
     }
+    """
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    func testWeChatAction() {
+        let sut = AdyenActionHandler()
+        sut.clientKey = "SOME_KLIENT_KEY"
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let weChatData = try! JSONDecoder().decode(WeChatPaySDKData.self, from: weChatActionResponse.data(using: .utf8)!)
+        let action = Action.sdk(.weChatPay(WeChatPaySDKAction.init(sdkData: weChatData, paymentData: "SOME_DATA") ))
+        sut.perform(action)
+
+        let waitExpectation = expectation(description: "Expect in app browser to be presented and then dismissed")
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(2)) {
+
+            XCTAssertNotNil(sut.weChatPaySDKActionComponent)
+            waitExpectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 10, handler: nil)
     }
 
 }
